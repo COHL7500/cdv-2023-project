@@ -1,5 +1,30 @@
+$canvas-color: black;
+$canvas-width: 1440px;
+$canvas-height: 875px;
+
 #canvas {
-  background-color: black;
+  background-color: $canvas-color;
+  min-width: $canvas-width;
+  min-height: $canvas-height;
+
+  .bottom-info-bar {
+    width: 100vw;
+    height: 100px;
+    background-color: purple;
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    display: flex;
+
+    p {
+      font-size: 40px;
+      color: orange;
+      display: flex;
+      margin-left: 20px;
+      align-items: center;
+    }
+  }
 
   .tooltip {
     opacity: 0;

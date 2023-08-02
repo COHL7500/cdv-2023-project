@@ -1,0 +1,8 @@
+type,name,zeroC,halfC,oneC,oneHalfC,twoC,twoHalfC,threeC,threeHalfC,fourC,fourHalfC,fiveC,fiveHalfC,sixC
+insects,bumblebee,0,45,60,75,90,100,100,100,100,100,100,100,100
+Birds,forest_bird,0,36.75,49,61.25,75.5,87.25,91.5,100,100,100,100,100,100
+Reptiles & Amphibians,frog,0,42,82,100,100,100,100,100,100,100,100,100,100
+Marine Life,oyster,0,10,15,20,25,30,35,40,45,50,55,60,65
+Mammals,seal,0,8.25,16.5,24.75,33,40.25,48,55.75,63.5,71.25,79,86.75,94.5
+Plants,wheat,0,2,6,10,14,18,22,26,30,34,38,42,46
+
