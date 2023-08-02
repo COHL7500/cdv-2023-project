@@ -22,33 +22,49 @@ d3.csv("dataset.csv").then(d => {
 
     const tempCol = d.columns.slice(2);
 
-    d.map((d) => {
-
-        const animal: Animal = {
-                name: d.name,
-                type: d.type,
-                temp: tempCol.map((col) => +d[col]),
-                img: "img/" + d.name + ".jpg",
-                x: (Math.floor(Math.random() * (maxPos - minPos + 1) + minPos)),
-                y: (Math.floor(Math.random() * (maxPos - minPos + 1) + minPos)),
-            };
+  d.map((d) => {
+    const animal: Animal = {
+      name: d.name,
+      type: d.type,
+      temp: tempCol.map((col) => +d[col]),
+      img: 'img/' + d.name + '.png',
+      x: Math.floor(Math.random() * (800 - 10 + 1) + 10),
+      y: Math.floor(Math.random() * (800 - 10 + 1) + 10),
+    };
 
         animalMap.set(d.name, animal);
 
-        addAnimal(animal);
-    });
-
-    console.log(animalMap)
-})
+    addAnimal(animal);
+  });
+  d3.select('#start-button').on('click', () => {
+    d3.select('#text-container').style('opacity', 0);
+    startFade(animalMap);
+  });
+});
 
 const addAnimal = (animal: Animal) => {
-    canvas.append("img")
-        .attr("src", animal.img)
-        .style("width", "10%")
-        .style("height", "auto")
-        .style("transform", `translate(${animal.x}px, ${animal.y}px)`);
-
+  canvas
+    .append('img')
+    .attr('src', animal.img)
+    .attr('id', animal.name)
+    .style('width', '10%')
+    .style('height', 'auto')
+    .style('top', `${animal.y}px`)
+    .style('left', `${animal.x}px`)
+    .style('position', 'absolute');
 };
+
+function startFade(animalMap: Map<string, Animal>) {
+  animalMap.forEach((animal) => {
+    let startIndex = 1;
+    for (let i = startIndex; i <= startIndex + 11; i++) {
+      d3.select('#' + animal.name)
+        .transition()
+        .duration(36000)
+        .style('opacity', 1 - animal.temp[i] / 100);
+    }
+  });
+}
 
 // info bar bottom
 const bottomInfoBar = canvas
