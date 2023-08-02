@@ -3,6 +3,9 @@ const canvas = d3.select("#canvas");
 const maxPos: number = 800;
 const minPos: number = 20;
 
+let currYear: number = 2020;
+let currTemp: number = 0;
+
 type Animal = {
     name: string,
     type: string,
@@ -26,8 +29,8 @@ d3.csv("dataset.csv").then(d => {
                 type: d.type,
                 temp: tempCol.map((col) => +d[col]),
                 img: "img/" + d.name + ".jpg",
-                x: (Math.floor(Math.random() * (800 - 10 + 1) + 10)),
-                y: (Math.floor(Math.random() * (800 - 10 + 1) + 10)),
+                x: (Math.floor(Math.random() * (maxPos - minPos + 1) + minPos)),
+                y: (Math.floor(Math.random() * (maxPos - minPos + 1) + minPos)),
             };
 
         animalMap.set(d.name, animal);
@@ -53,28 +56,43 @@ const bottomInfoBar = canvas
     .attr("class", "bottom-info-bar");
 
 const infoContainer = bottomInfoBar.append("div")
-    .attr("class", "info-container")
-    .style("background-color", "black")
+    .attr("class", "info-container");
 
 infoContainer
     .append("p")
     .attr("id", "yearInfo")
-    .text("2023");
+    .text(currYear.toString());
 
 infoContainer
     .append("p")
     .attr("id", "tempInfo")
-    .text("0C");
+    .text(currTemp + "C");
 
-let currYear = parseInt(d3.select("#yearInfo").html());
-let currTemp = parseInt(d3.select("#tempInfo").html().replace('C', ''));
+function calcTemp(year) {
+    return -146.99 + (19.46 * Math.log(year));
+}
 
 function updateInfo() {
     d3.select("#yearInfo").text(currYear++);
-    d3.select("#tempInfo").text(currTemp++ + "C");
+    d3.select("#tempInfo").text(calcTemp(currYear).toFixed(1) + "C");
 }
 
-setInterval(updateInfo, 2000)
+setInterval(updateInfo, 75); // 36 seconds to go from 0C to 6C = 75 milliseconds per year
+
+/*
+let prevYearTemp = 1.11
+for(let i = 2021; i <= 2500; i++) {
+    let currentYearTemp = calcTemp(i)
+    data.push({
+        year: i,
+        temperatureIncrease: currentYearTemp - prevYearTemp,
+        totalTemperature: currentYearTemp
+    })
+    prevYearTemp = currentYearTemp
+}
+console.log(data)
+
+ */
 
 /*
 const w = 1000;
