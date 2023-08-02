@@ -48,29 +48,33 @@ const addAnimal = (animal: Animal) => {
 };
 
 // info bar bottom
-
 const bottomInfoBar = canvas
     .append("div")
     .attr("class", "bottom-info-bar");
 
-bottomInfoBar
-.append("p")
+const infoContainer = bottomInfoBar.append("div")
+    .attr("class", "info-container")
+    .style("background-color", "black")
+
+infoContainer
+    .append("p")
     .attr("id", "yearInfo")
-    .text("2023")
-.append("p")
+    .text("2023");
+
+infoContainer
+    .append("p")
     .attr("id", "tempInfo")
-    .text("0C")
+    .text("0C");
 
+let currYear = parseInt(d3.select("#yearInfo").html());
+let currTemp = parseInt(d3.select("#tempInfo").html().replace('C', ''));
 
-let counter = 2023
-
-function updateValues() {
-    counter++
-    d3.select("#yearInfo").text(counter)
-    d3.select("#tempInfo").text(counter + "C")
+function updateInfo() {
+    d3.select("#yearInfo").text(currYear++);
+    d3.select("#tempInfo").text(currTemp++ + "C");
 }
 
-setInterval(updateValues, 2000)
+setInterval(updateInfo, 2000)
 
 /*
 const w = 1000;

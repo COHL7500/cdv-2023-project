@@ -17,12 +17,15 @@ $canvas-height: 875px;
     left: 0;
     display: flex;
 
+    .info-container {
+      display: flex;
+      align-items: center;
+    }
+
     p {
+      margin-left: 20px;
       font-size: 40px;
       color: orange;
-      display: flex;
-      margin-left: 20px;
-      align-items: center;
     }
   }
 
