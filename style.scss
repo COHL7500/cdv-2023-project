@@ -12,12 +12,15 @@ $canvas-height: 875px;
   min-height: $canvas-height;
   display: flex;
 
+  #start-container {
+    position: fixed;
+  }
+
   .bottom-info-bar {
     width: 100vw;
     height: 100px;
     background-color: transparent;
     position: fixed;
-    border-style: solid;
     z-index: 1;
     bottom: 0;
     left: 0;
@@ -32,7 +35,7 @@ $canvas-height: 875px;
     p {
       margin-left: 20px;
       font-size: 40px;
-      color: orange;
+      color: black;
     }
   }
 
@@ -47,14 +50,20 @@ $canvas-height: 875px;
     max-width: 200px;
   }
 
-  #text-container {
-    display: flex;
-    position: absolute;
-    left: 30%;
+  #start-container {
+    //display: flex;
+    //position: absolute;
+    //left: 30%;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
   }
 
   h1 {
-    font-family: 'Montserrat Medium';
+    font-family: 'Montserrat Medium', sans-serif;
     max-width: 40ch;
     text-align: center;
     transform: scale(0.94);
@@ -73,6 +82,15 @@ $canvas-height: 875px;
     opacity: 0;
     filter: blur(4px);
   }
+
+  /*
+  @for $n from 1 through 24 {
+    span:nth-child(#{n}) {
+      animation: fade-in 2.5s 0.1s forwards cubic-bezier(0.11, 0, 0.5, 0);
+    }
+  }
+
+   */
 
   span:nth-child(1) {
     animation: fade-in 0.8s 0.1s forwards cubic-bezier(0.11, 0, 0.5, 0);
@@ -174,7 +192,7 @@ $canvas-height: 875px;
 
   /*Start button*/
   #start-button {
-    appearance: button;
+    appearance: menulist-button;
     background-color: #1899d6;
     border: solid transparent;
     border-radius: 16px;
@@ -201,6 +219,10 @@ $canvas-height: 875px;
     vertical-align: middle;
     white-space: nowrap;
     margin-top: 20px;
+
+    &:hover {
+      background-color: darkblue;
+    }
   }
 
   .button-19:after {

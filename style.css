@@ -8,27 +8,39 @@
   min-height: 875px;
   display: flex;
   /* Text animation start */
+  /*
+  @for $n from 1 through 24 {
+    span:nth-child(n) {
+      animation: fade-in 2.5s 0.1s forwards cubic-bezier(0.11, 0, 0.5, 0);
+    }
+  }
+
+   */
   /* Text animation end*/
   /*Start button*/
+}
+#canvas #start-container {
+  position: fixed;
 }
 #canvas .bottom-info-bar {
   width: 100vw;
   height: 100px;
   background-color: transparent;
   position: fixed;
-  border-style: solid;
   z-index: 1;
   bottom: 0;
   left: 0;
   display: flex;
   margin-bottom: 1px;
 }
-#canvas .bottom-info-bar p {
-  font-size: 40px;
-  color: orange;
+#canvas .bottom-info-bar .info-container {
   display: flex;
-  margin-left: 20px;
   align-items: center;
+}
+#canvas .bottom-info-bar p {
+  margin-left: 20px;
+  font-size: 40px;
+  color: black;
 }
 #canvas .tooltip {
   opacity: 0;
@@ -40,13 +52,15 @@
   position: absolute;
   max-width: 200px;
 }
-#canvas #text-container {
-  display: flex;
-  position: absolute;
-  left: 30%;
+#canvas #start-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
 }
 #canvas h1 {
-  font-family: "Montserrat Medium";
+  font-family: "Montserrat Medium", sans-serif;
   max-width: 40ch;
   text-align: center;
   transform: scale(0.94);
@@ -141,9 +155,7 @@
   }
 }
 #canvas #start-button {
-  -webkit-appearance: button;
-     -moz-appearance: button;
-          appearance: button;
+  appearance: menulist-button;
   background-color: #1899d6;
   border: solid transparent;
   border-radius: 16px;
@@ -165,12 +177,14 @@
   touch-action: manipulation;
   transform: translateZ(0);
   transition: filter 0.2s;
-  -moz-user-select: none;
-       user-select: none;
+  user-select: none;
   -webkit-user-select: none;
   vertical-align: middle;
   white-space: nowrap;
   margin-top: 20px;
+}
+#canvas #start-button:hover {
+  background-color: darkblue;
 }
 #canvas .button-19:after {
   background-clip: padding-box;
@@ -188,9 +202,7 @@
 }
 #canvas .button-19:main,
 #canvas .button-19:focus {
-  -webkit-user-select: auto;
-     -moz-user-select: auto;
-          user-select: auto;
+  user-select: auto;
 }
 #canvas .button-19:hover:not(:disabled) {
   filter: brightness(1.1);
@@ -198,4 +210,4 @@
 }
 #canvas .button-19:disabled {
   cursor: auto;
-}/*# sourceMappingURL=style.css.map */
+}

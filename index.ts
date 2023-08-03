@@ -28,17 +28,18 @@ d3.csv("dataset.csv").then(d => {
       type: d.type,
       temp: tempCol.map((col) => +d[col]),
       img: 'img/' + d.name + '.png',
-      x: Math.floor(Math.random() * (800 - 10 + 1) + 10),
-      y: Math.floor(Math.random() * (800 - 10 + 1) + 10),
+      x: parseInt(d.x),
+      y: parseInt(d.y)
     };
 
-        animalMap.set(d.name, animal);
+    animalMap.set(d.name, animal);
 
     addAnimal(animal);
   });
   d3.select('#start-button').on('click', () => {
-    d3.select('#text-container').style('opacity', 0);
+    d3.select('#start-container').style('opacity', 0);
     startFade(animalMap);
+    setInterval(updateInfo, 75); // 36 seconds to go from 0C to 6C = 75 milliseconds per year
   });
 });
 
@@ -92,8 +93,6 @@ function updateInfo() {
     d3.select("#yearInfo").text(currYear++);
     d3.select("#tempInfo").text(calcTemp(currYear).toFixed(1) + "C");
 }
-
-setInterval(updateInfo, 75); // 36 seconds to go from 0C to 6C = 75 milliseconds per year
 
 /*
 let prevYearTemp = 1.11
