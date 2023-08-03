@@ -1,8 +1,5 @@
 const canvas = d3.select("#canvas");
 
-const maxPos: number = 800;
-const minPos: number = 20;
-
 let currYear: number = 2020;
 let currTemp: number = 0;
 
@@ -24,27 +21,38 @@ d3.csv("dataset.csv").then(d => {
 
   d.map((d) => {
     const animal: Animal = {
-      name: d.name,
-      type: d.type,
-      temp: tempCol.map((col) => +d[col]),
-      img: 'img/' + d.name + '.png',
-      x: parseInt(d.x),
-      y: parseInt(d.y)
+        name: d.name,
+        type: d.type,
+        temp: tempCol.map((col) => +d[col]),
+        img: 'img/' + d.name + '.png',
+        x: parseInt(d.x),
+        y: parseInt(d.y),
+        text: d.text,
     };
 
     animalMap.set(d.name, animal);
 
     addAnimal(animal);
   });
+
+  console.log(animalMap);
+
   d3.select('#start-button').on('click', () => {
-    d3.select('#start-container').style('opacity', 0);
+    d3.select('#start-container').remove();
     startFade(animalMap);
-    setInterval(updateInfo, 75); // 36 seconds to go from 0C to 6C = 75 milliseconds per year
+    const infoUpdateInterval = setInterval(() => {
+        if (currYear == 2500) {
+            clearInterval(infoUpdateInterval);
+        }
+
+        updateInfo();
+
+    }, 75); // 36 seconds to go from 0C to 6C = 75 milliseconds per year
   });
 });
 
 const addAnimal = (animal: Animal) => {
-  canvas
+  const animalElement = canvas
     .append('img')
     .attr('src', animal.img)
     .attr('id', animal.name)
@@ -53,6 +61,10 @@ const addAnimal = (animal: Animal) => {
     .style('top', `${animal.y}px`)
     .style('left', `${animal.x}px`)
     .style('position', 'absolute');
+
+  animalElement.on('mouseover', () => onMouseOver(animal));
+  animalElement.on('mouseleave', () => onMouseLeave());
+  animalElement.on('mousemove', (event) => onMouseMove(event, animal));
 };
 
 function startFade(animalMap: Map<string, Animal>) {
@@ -65,6 +77,28 @@ function startFade(animalMap: Map<string, Animal>) {
         .style('opacity', 1 - animal.temp[i] / 100);
     }
   });
+}
+
+const tooltip = d3.select("#canvas")
+    .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+
+
+// tooltip
+const onMouseOver = function(d: Animal) {
+    tooltip.style("opacity", d3.select('#' + d.name).style('opacity'))
+}
+
+const onMouseMove = function (event: any, d: Animal) {
+    tooltip
+        .html(`${d.text}`)
+        .style("left", event.pageX + 10 + "px")
+        .style("top", event.pageY + 10 + "px")
+}
+
+const onMouseLeave = function() {
+    tooltip.style("opacity", 0)
 }
 
 // info bar bottom

@@ -1,6 +1,4 @@
 var canvas = d3.select("#canvas");
-var maxPos = 800;
-var minPos = 20;
 var currYear = 2020;
 var currTemp = 0;
 var animalMap = new Map;
@@ -13,19 +11,26 @@ d3.csv("dataset.csv").then(function (d) {
             temp: tempCol.map(function (col) { return +d[col]; }),
             img: 'img/' + d.name + '.png',
             x: parseInt(d.x),
-            y: parseInt(d.y)
+            y: parseInt(d.y),
+            text: d.text,
         };
         animalMap.set(d.name, animal);
         addAnimal(animal);
     });
+    console.log(animalMap);
     d3.select('#start-button').on('click', function () {
-        d3.select('#start-container').style('opacity', 0);
+        d3.select('#start-container').remove();
         startFade(animalMap);
-        setInterval(updateInfo, 75); // 36 seconds to go from 0C to 6C = 75 milliseconds per year
+        var infoUpdateInterval = setInterval(function () {
+            if (currYear == 2500) {
+                clearInterval(infoUpdateInterval);
+            }
+            updateInfo();
+        }, 75); // 36 seconds to go from 0C to 6C = 75 milliseconds per year
     });
 });
 var addAnimal = function (animal) {
-    canvas
+    var animalElement = canvas
         .append('img')
         .attr('src', animal.img)
         .attr('id', animal.name)
@@ -34,6 +39,9 @@ var addAnimal = function (animal) {
         .style('top', "".concat(animal.y, "px"))
         .style('left', "".concat(animal.x, "px"))
         .style('position', 'absolute');
+    animalElement.on('mouseover', function () { return onMouseOver(animal); });
+    animalElement.on('mouseleave', function () { return onMouseLeave(); });
+    animalElement.on('mousemove', function (event) { return onMouseMove(event, animal); });
 };
 function startFade(animalMap) {
     animalMap.forEach(function (animal) {
@@ -46,6 +54,23 @@ function startFade(animalMap) {
         }
     });
 }
+var tooltip = d3.select("#canvas")
+    .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip");
+// tooltip
+var onMouseOver = function (d) {
+    tooltip.style("opacity", d3.select('#' + d.name).style('opacity'));
+};
+var onMouseMove = function (event, d) {
+    tooltip
+        .html("".concat(d.text))
+        .style("left", event.pageX + 10 + "px")
+        .style("top", event.pageY + 10 + "px");
+};
+var onMouseLeave = function () {
+    tooltip.style("opacity", 0);
+};
 // info bar bottom
 var bottomInfoBar = canvas
     .append("div")
