@@ -1,13 +1,14 @@
 $canvas-color: black;
-$canvas-width: 1440px;
-$canvas-height: 875px;
+$canvas-width: 1920px;
+$canvas-height: 1200px;
 
-* {
+body, html {
   padding: 0;
   margin: 0;
 }
 
 #canvas {
+  background-image: url(img/landscape.jpg);
   min-width: $canvas-width;
   min-height: $canvas-height;
   display: flex;
@@ -45,12 +46,8 @@ $canvas-height: 875px;
     z-index: 1;
     color: white;
     background-color: green;
-    //border: 2.5 px solid white;
-    //border-radius: 5px;
     padding: 5px;
     position: absolute;
-    //max-width: 200px;
-
   }
 
   #start-container {
