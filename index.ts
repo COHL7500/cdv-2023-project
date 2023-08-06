@@ -56,7 +56,7 @@ const addAnimal = (animal: Animal) => {
     .append('img')
     .attr('src', animal.img)
     .attr('id', animal.name)
-    .style('width', '10%')
+    .style('max-width', "150px")
     .style('height', 'auto')
     .style('top', `${animal.y}px`)
     .style('left', `${animal.x}px`)
