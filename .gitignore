@@ -29,6 +29,7 @@ package-lock.json
 # Icon must end with two \r
 Icon
 
+index.js
 
 # Thumbnails
 ._*
@@ -43,6 +44,8 @@ Icon
 .com.apple.timemachine.donotpresent
 
 *.css
+
+
 
 # Directories potentially created on remote AFP share
 .AppleDB
