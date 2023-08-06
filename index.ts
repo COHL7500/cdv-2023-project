@@ -69,6 +69,18 @@ const addAnimal = (animal: Animal) => {
 
 function startFade(animalMap: Map<string, Animal>) {
   animalMap.forEach((animal) => {
+
+      const animalElement = d3.select('#' + animal.name);
+
+      animalElement
+          .transition()
+          .duration(36000)
+          .tween('fade', () => {
+              const interpolate = d3.interpolate(1, 1 - animal.temp[12] / 100);
+              return (t) => animalElement.style('opacity', interpolate(t));
+          });
+
+      /*
     let startIndex = 1;
     for (let i = startIndex; i <= startIndex + 11; i++) {
       d3.select('#' + animal.name)
@@ -76,6 +88,8 @@ function startFade(animalMap: Map<string, Animal>) {
         .duration(36000)
         .style('opacity', 1 - animal.temp[i] / 100);
     }
+
+       */
   });
 }
 
