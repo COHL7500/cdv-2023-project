@@ -64,7 +64,7 @@ const addAnimal = (animal: Animal) => {
 
   animalElement.on('mouseover', () => onMouseOver(animal));
   animalElement.on('mouseleave', () => onMouseLeave());
-  animalElement.on('mousemove', (event) => onMouseMove(event, animal));
+  animalElement.on('mousemove', (event) => onMouseMove(event));
 };
 
 const xScale = d3.scaleLinear().domain([0, 6]).range([6000, 36000]);
@@ -99,20 +99,46 @@ function startFade(animalMap: Map<string, Animal>) {
   });
 }
 
-const tooltip = d3
-  .select('#canvas')
-  .append('div')
-  .style('opacity', 0)
-  .attr('class', 'tooltip');
+const tooltip =
+    d3.select('#canvas')
+        .append('div')
+        .style('opacity', 0)
+        .attr('class', 'tooltip')
 
 // tooltip
+
+const tooltipTitleText = d3.select('.tooltip')
+    .append('p')
+    .attr('id', 'tooltip-title-text')
+
+const tooltipTypeText = d3.select('.tooltip')
+    .append('p')
+    .attr('id', 'tooltip-type-text')
+
+const tooltipInfoText = d3.select('.tooltip')
+    .append('p')
+    .attr('id', 'tooltip-info-text')
+
+
 const onMouseOver = function (d: Animal) {
   tooltip.style('opacity', d3.select('#' + d.name).style('opacity'));
+
+  const rawName = (d.name).replace('_', ' ');
+  const cleanName = rawName.charAt(0).toUpperCase() + rawName.slice(1);
+
+  tooltipInfoText
+      .text(d.text);
+
+  tooltipTitleText
+      .text(cleanName);
+
+  tooltipTypeText
+      .text(d.type);
 };
 
-const onMouseMove = function (event: any, d: Animal) {
+const onMouseMove = function (event: any) {
   tooltip
-    .html(`${d.text}`)
+    //.html(`${d.text}`)
     .style('left', event.pageX + 10 + 'px')
     .style('top', event.pageY + 10 + 'px');
 };
@@ -153,52 +179,3 @@ function updateInfo() {
   d3.select('#yearInfo').text(currYear++);
   d3.select('#tempInfo').text(calcTemp(currYear).toFixed(1) + 'C');
 }
-
-/*
-let prevYearTemp = 1.11
-for(let i = 2021; i <= 2500; i++) {
-    let currentYearTemp = calcTemp(i)
-    data.push({
-        year: i,
-        temperatureIncrease: currentYearTemp - prevYearTemp,
-        totalTemperature: currentYearTemp
-    })
-    prevYearTemp = currentYearTemp
-}
-console.log(data)
-
- */
-
-/*
-const w = 1000;
-const h = 1000;
-var canvas = d3
-  .select('#canvas')
-  .append('svg')
-  .attr('width', w)
-  .attr('height', h)
-  .style('background-color', 'black');
-var animalData = [];
-d3.csv('climatedata.csv').then(function (data) {
-  animalData = data;
-  draw();
-  console.log(animalData);
-});
-var trigger = "one";
-function draw() {
-  canvas
-    .selectAll('circle')
-    .data(animalData)
-    .join('circle')
-    .attr('cx', function (d, i) {
-      console.log(d);
-      return i * 30;
-    })
-    .attr('cy', h / 2)
-    .attr('r', function (d) {
-      console.log(d)
-      return d.one;
-    })
-    .attr('fill', 'white');
-}
- */
