@@ -44,6 +44,8 @@ body, html {
     opacity: 0;
     font-family: 'Arial', 'sans-serif';
     z-index: 1;
+    max-width: 500px;
+    height: auto;
     color: white;
     background-color: green;
     padding: 5px;
