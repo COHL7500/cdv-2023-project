@@ -6,6 +6,15 @@
   </head>
   <body>
     <div id="canvas">
+      <svg id="canvas" width="800" height="600">
+        <g
+          id="smoke"
+          data-id="smoke"
+          style="transform: translate(400px, 300px)"
+        >
+          <circle stroke="#000" stroke-width="3.5" fill="#fff" r="10"></circle>
+        </g>
+      </svg>
       <div id="start-container">
         <h1>
           <!-- automate this with javascript !-->
@@ -17,7 +26,7 @@
           <span>without</span>
           <span>living</span>
           <span>animals?</span>
-          <br>
+          <br />
           <span>Click</span>
           <span>below</span>
           <span>to</span>
@@ -33,12 +42,17 @@
           <span>for</span>
           <span>our</span>
           <span>planet</span>
-          <br>
+          <br />
           <button id="start-button" type="button">Start Experience</button>
         </h1>
       </div>
     </div>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="index.js"></script>
+    <script>
+      const point = document.getElementById('smoke');
+      point.smoke = new Smoke();
+      point.smoke.startAnimation();
+    </script>
   </body>
 </html>
