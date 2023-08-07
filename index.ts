@@ -122,7 +122,7 @@ infoContainer
     .attr("id", "tempInfo")
     .text(currTemp + "C");
 
-function calcTemp(year) {
+function calcTemp(year: number) {
     return -146.99 + (19.46 * Math.log(year));
 }
 
