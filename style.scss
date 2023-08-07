@@ -2,7 +2,8 @@ $canvas-color: black;
 $canvas-width: 1920px;
 $canvas-height: 1200px;
 
-body, html {
+body,
+html {
   padding: 0;
   margin: 0;
 }
@@ -12,9 +13,40 @@ body, html {
   min-width: $canvas-width;
   min-height: $canvas-height;
   display: flex;
+  z-index: 0;
 
   #start-container {
     position: fixed;
+  }
+
+  .graveyard-container {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 20vw;
+    height: 15vh;
+    background-color: rgba(87, 176, 194, 0.5);
+    border: solid;
+    border-top: 0;
+    border-right: 0;
+    z-index: 2;
+
+    .graveyard-title {
+      font-size: 10px;
+      height: 25%;
+      width: 100%;
+      text-align: center;
+    }
+
+    .graveyard {
+      display: grid;
+      grid-template-columns: auto auto auto auto auto auto auto;
+      height: 75%;
+      width: 100%;
+      margin: 10px;
+    }
   }
 
   .bottom-info-bar {
@@ -86,11 +118,14 @@ body, html {
     display: inline-block;
     opacity: 0;
     filter: blur(4px);
-    animation: fade-in $animation-duration forwards cubic-bezier(0.11, 0, 0.5, 0);
+    animation: fade-in $animation-duration forwards
+      cubic-bezier(0.11, 0, 0.5, 0);
 
     @for $i from 1 through $animation-count {
       &:nth-child(#{$i}) {
-        animation-delay: $animation-delay + $animation-delay-increment * ($i - 1);
+        animation-delay: $animation-delay +
+          $animation-delay-increment *
+          ($i - 1);
       }
     }
   }
