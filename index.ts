@@ -21,14 +21,14 @@ d3.csv('dataset.csv').then((d) => {
 
   d.map((d) => {
     const animal: Animal = {
-      name: d.name,
-      type: d.type,
-      temp: tempCol.map((col) => +d[col]),
-      img: 'img/' + d.name + '.png',
-      x: parseInt(d.x),
-      y: parseInt(d.y),
-      extinctDegree: parseFloat(d.extinctDegree),
-      text: d.text,
+        name: d.name,
+        type: d.type,
+        temp: tempCol.map((col) => +d[col]),
+        img: 'img/' + d.type + '/' + d.name + '.png',
+        x: parseInt(d.x),
+        y: parseInt(d.y),
+        extinctDegree: parseFloat(d.extinctDegree),
+        text: d.text,
     };
 
     animalMap.set(d.name, animal);
@@ -96,14 +96,6 @@ function startFade(animalMap: Map<string, Animal>) {
           );
         };
       });
-
-    // let startIndex = 1;
-    // for (let i = startIndex; i <= startIndex + 11; i++) {
-    //   d3.select('#' + animal.name)
-    //     .transition()
-    //     .duration(36000)
-    //     .style('opacity', 1 - animal.temp[i] / 100);
-    // }
   });
 }
 
@@ -153,8 +145,8 @@ infoContainer
   .attr('id', 'tempInfo')
   .text(currTemp + 'C');
 
-function calcTemp(year) {
-  return -146.99 + 19.46 * Math.log(year);
+function calcTemp(year: number) {
+    return -146.99 + (19.46 * Math.log(year));
 }
 
 function updateInfo() {
