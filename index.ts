@@ -24,7 +24,7 @@ d3.csv("dataset.csv").then(d => {
         name: d.name,
         type: d.type,
         temp: tempCol.map((col) => +d[col]),
-        img: 'img/' + d.name + '.png',
+        img: 'img/' + d.type + '/' + d.name + '.png',
         x: parseInt(d.x),
         y: parseInt(d.y),
         text: d.text,
@@ -79,17 +79,6 @@ function startFade(animalMap: Map<string, Animal>) {
               const interpolate = d3.interpolate(1, 1 - animal.temp[12] / 100);
               return (t) => animalElement.style('opacity', interpolate(t));
           });
-
-      /*
-    let startIndex = 1;
-    for (let i = startIndex; i <= startIndex + 11; i++) {
-      d3.select('#' + animal.name)
-        .transition()
-        .duration(36000)
-        .style('opacity', 1 - animal.temp[i] / 100);
-    }
-
-       */
   });
 }
 
