@@ -17,7 +17,7 @@ type Animal = {
 let animalMap = new Map<string, Animal>();
 
 d3.csv('dataset.csv').then((d) => {
-  const tempCol = d.columns.slice(2);
+  const tempCol: string[] = d.columns.slice(2);
 
   d.map((d) => {
     const animal: Animal = {
@@ -83,13 +83,19 @@ function startFade(animalMap: Map<string, Animal>) {
             Number(((interpolate(t) * 100) / 100).toFixed(2)) == 0.02 &&
             !addToGrave
           ) {
-            addToGrave = true;
-            graveyard
+            addToGrave = !addToGrave;
+            animalElement.remove();
+
+            graveyardElement
               .append('img')
               .attr('src', animal.img)
               .attr('id', `${animal.name}-grave`)
-              .style('max-width', '20px');
+              .style('max-width', '20px')
+                .on('mouseover', () => onMouseOver(animal))
+                .on('mouseleave', () => onMouseLeave())
+                .on('mousemove', (event) => onMouseMove(event));
           }
+
           animalElement.style(
             'opacity',
             Number(((interpolate(t) * 100) / 100).toFixed(2))
@@ -121,7 +127,7 @@ const tooltipInfoText = d3.select('.tooltip')
 
 
 const onMouseOver = function (d: Animal) {
-  tooltip.style('opacity', d3.select('#' + d.name).style('opacity'));
+  tooltip.style('opacity', 1);
 
   const rawName = (d.name).replace('_', ' ');
   const cleanName = rawName.charAt(0).toUpperCase() + rawName.slice(1);
@@ -137,10 +143,14 @@ const onMouseOver = function (d: Animal) {
 };
 
 const onMouseMove = function (event: any) {
+
+  const tooltipWidth: number = parseInt(tooltip.style('width'));
+
   tooltip
-    //.html(`${d.text}`)
-    .style('left', event.pageX + 10 + 'px')
-    .style('top', event.pageY + 10 + 'px');
+      .style('left', ((event.pageX + tooltipWidth) > window.innerWidth ?
+          (event.pageX - tooltipWidth - 10) :
+          (event.pageX + 10)) + 'px')
+      .style('top', event.pageY + 10 + 'px');
 };
 
 const onMouseLeave = function () {
@@ -155,7 +165,7 @@ const graveyardTitle = graveyardContainer
   .append('h3')
   .attr('class', 'graveyard-title')
   .text('The following animals are now extinct....');
-const graveyard = graveyardContainer.append('div').attr('class', 'graveyard');
+const graveyardElement = graveyardContainer.append('div').attr('class', 'graveyard');
 
 // info bar bottom
 const bottomInfoBar = canvas.append('div').attr('class', 'bottom-info-bar');

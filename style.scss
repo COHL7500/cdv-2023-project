@@ -16,6 +16,7 @@ html {
 
   #start-container {
     position: fixed;
+    z-index: 1;
   }
 
   .graveyard-container {
@@ -74,21 +75,28 @@ html {
   .tooltip {
     opacity: 0;
     font-family: 'Arial', 'sans-serif';
-    z-index: 1;
+    color: black;
+    z-index: 3;
     width: 500px;
     height: auto;
-    color: white;
-    background-color: green;
+    background-color: whitesmoke;
     padding: 5px;
     position: absolute;
+    border-radius: 0.5em;
 
     p {
+      word-wrap: normal;
       margin: 2px;
     }
 
     #tooltip-title-text {
       font-weight: bold;
       font-size: large;
+    }
+
+    #tooltip-type-text {
+      font-style: italic;
+      margin-bottom: 0.5em;
     }
   }
 
