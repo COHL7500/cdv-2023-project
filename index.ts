@@ -37,7 +37,7 @@ d3.csv('dataset.csv').then((d) => {
 
     animals.push(animal);
   });
-  console.log(animals);
+
   drawAnimals();
   d3.select('#start-button').on('click', () => {
     d3.select('#start-container').remove();
@@ -77,7 +77,7 @@ function drawAnimals() {
       return onMouseOver(d);
     })
     .on('mouseleave', () => onMouseLeave())
-    .on('mousemove', (event, d) => onMouseMove(event, d));
+    .on('mousemove', (event) => onMouseMove(event));
 }
 
 
@@ -105,7 +105,7 @@ function startFade(animals: Animal[]) {
               .attr('src', animal.img)
               .attr('id', `${animal.name}-grave`)
               .style('margin', '4px')
-              .style('max-width', '20px');
+              .style('max-width', '20px')
                 .on('mouseover', () => onMouseOver(animal))
                 .on('mouseleave', () => onMouseLeave())
                 .on('mousemove', (event) => onMouseMove(event));
