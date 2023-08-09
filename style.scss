@@ -77,7 +77,12 @@ html {
       .extinct-description {
         font-family: 'Roboto', sans-serif;
         text-align: center;
-        margin-bottom: 120px;
+        margin-bottom: 50px;
+      }
+
+      .click-description {
+        font-family: 'Roboto', sans-serif;
+        margin-bottom: 80px;
       }
 
       .temperature-description-container {
@@ -100,8 +105,20 @@ html {
         width: 50%;
       }
 
+      .grave-description {
+        font-family: 'Roboto', sans-serif;
+        width: 100%;
+        margin-right: 100px;
+      }
+
       .grave-description-container {
         display: flex;
+        margin-bottom: 48px;
+        width: 720px;
+      }
+
+      .grave-text-container {
+        margin-right: 160px;
       }
     }
   }
