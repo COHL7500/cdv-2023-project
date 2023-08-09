@@ -46,7 +46,7 @@ d3.csv('dataset.csv').then((d) => {
 
       updateInfo();
       startSmoke();
-    }, 10); // 36 seconds to go from 0C to 6C = 75 milliseconds per year
+    }, 75); // 36 seconds to go from 0C to 6C = 75 milliseconds per year
   });
 });
 
