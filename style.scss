@@ -37,8 +37,7 @@ html {
     min-height: 15vh;
     background-color: rgba(87, 176, 194, 0.5);
     border: solid;
-    border-top: 0;
-    border-right: 0;
+    border-radius: 8px;
     z-index: 2;
 
     .graveyard-title {
@@ -267,41 +266,5 @@ html {
 
   .button-19:disabled {
     cursor: auto;
-  }
-
-  //Filter
-  label {
-    padding: 4px 6px;
-    line-height: 190%;
-    outline-style: none;
-    transition: all 0.6s;
-  }
-
-  .hiddenCB div {
-    display: inline;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .hiddenCB input[type='checkbox'],
-  .hiddenCB input[type='radio'] {
-    display: none;
-  }
-
-  .hiddenCB label {
-    cursor: pointer;
-  }
-
-  .hiddenCB input[type='checkbox'] + label:hover {
-    background: rgba(0, 128, 128, 0.8);
-  }
-
-  .hiddenCB input[type='checkbox']:checked + label {
-    background: rgba(0, 128, 128, 0.4);
-  }
-
-  .hiddenCB input[type='checkbox']:checked + label:hover {
-    background: rgba(0, 128, 128, 0.7);
   }
 }

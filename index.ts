@@ -284,3 +284,4 @@ function startSmoke() {
   const point = d3.select('#smoke');
   const smoke = new Smoke();
 }
+
