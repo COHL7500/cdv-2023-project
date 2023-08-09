@@ -14,6 +14,98 @@ html {
   min-height: $canvas-height;
   z-index: 0;
 
+  .modal {
+    background-color: #e8c859;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1999;
+    display: flex;
+    .left-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      width: 50%;
+
+      .title {
+        font-family: 'Roboto', sans-serif;
+      }
+
+      .description {
+        font-family: 'Roboto', sans-serif;
+        width: 50%;
+        margin-bottom: 120px;
+      }
+
+      .madeby {
+        font-family: 'Roboto', sans-serif;
+        width: 50%;
+        margin-bottom: 120px;
+      }
+    }
+    .right-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      width: 50%;
+
+      .bee-container {
+        margin-top: 20px;
+        display: flex;
+        gap: 70px;
+        justify-content: center;
+
+        #bee1 {
+          opacity: 0.75;
+        }
+
+        #bee2 {
+          opacity: 0.5;
+        }
+
+        #bee3 {
+          opacity: 0.25;
+        }
+      }
+
+      .extinct-rate {
+        text-align: center;
+      }
+
+      .extinct-description {
+        font-family: 'Roboto', sans-serif;
+        text-align: center;
+        margin-bottom: 120px;
+      }
+
+      .temperature-description-container {
+        display: flex;
+        margin-bottom: 48px;
+      }
+
+      .text-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .temperature-description {
+        font-family: 'Roboto', sans-serif;
+        width: 50%;
+      }
+
+      .img-container {
+        width: 50%;
+      }
+
+      .grave-description-container {
+        display: flex;
+      }
+    }
+  }
+
   #canvas-smoke {
     width: $canvas-width;
     height: $canvas-height;
@@ -35,21 +127,16 @@ html {
     top: 0;
     width: 20vw;
     min-height: 15vh;
-    background-color: rgba(87, 176, 194, 0.5);
+    background-color: rgba(112, 114, 114, 0.5);
     border: solid;
     border-radius: 8px;
     z-index: 2;
-
-    .graveyard-title {
-      font-size: 10px;
-      height: 25%;
-      width: 100%;
-      text-align: center;
-    }
+    margin-top: 10px;
+    margin-right: 10px;
 
     .graveyard {
       display: grid;
-      grid-template-columns: auto auto auto auto auto auto auto;
+      grid-template-columns: auto auto auto auto auto auto auto auto auto;
       height: 75%;
       width: 100%;
       margin: 10px;
@@ -71,6 +158,7 @@ html {
     margin-left: 10px;
     margin-bottom: 10px;
     background-color: #757474;
+    font-family: 'Roboto', sans-serif;
 
     .chimney1 {
       position: fixed;

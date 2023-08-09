@@ -1,11 +1,148 @@
 <!DOCTYPE html>
 <html lang="da">
   <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
     <title>Day 7</title>
   </head>
   <body>
     <div id="canvas">
+      <div class="modal">
+        <div class="left-container">
+          <h2 class="title">CDV - The bigger picture</h2>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="466"
+            height="10"
+            viewBox="0 0 466 10"
+            fill="none"
+          >
+            <path
+              d="M1.53516 6.2507C48.0797 6.2507 94.6242 6.2507 141.169 6.2507C189.647 6.2507 239.495 9.59907 287.788 5.57469C324.067 2.55138 361.297 2.19464 397.677 2.19464C419.642 2.19464 442.084 2.19464 463.926 2.19464"
+              stroke="black"
+              stroke-width="3"
+              stroke-linecap="round"
+            />
+          </svg>
+          <p class="description">
+            Picture a world where the animals we're used to are missing. No bees
+            buzzing around, no honey to taste, flowers unable to bloom, and no
+            birds soaring in the air. If the Earth keeps getting warmer, this
+            could actually happen sooner than we think. <br />
+            <br />"Imagine" is a project that takes you on an adventure to learn
+            how different animals are affected by changes in temperature.
+          </p>
+          <h2 class="title">Made by...</h2>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="392"
+            height="8"
+            viewBox="0 0 392 8"
+            fill="none"
+          >
+            <path
+              d="M1.64746 1.76917C86.8497 1.76917 172.052 1.76917 257.254 1.76917C284.64 1.76917 311.743 5.52513 339.051 5.82522C355.922 6.01062 372.805 5.82522 389.677 5.82522"
+              stroke="black"
+              stroke-width="3"
+              stroke-linecap="round"
+            />
+          </svg>
+          <p class="madeby">
+            Michael Tran <br />
+            Bastjan Sejberg <br />
+            <br />
+            ITU - Creative Data Visualization 2023
+          </p>
+        </div>
+        <div class="right-container">
+          <div class="bee-container">
+            <div>
+              <img
+                id="bee"
+                src="img/Insects/bumblebee.png"
+                width="100px"
+                alt="bee"
+              />
+              <p class="extinct-rate">100%</p>
+            </div>
+            <div>
+              <img
+                id="bee1"
+                src="img/Insects/bumblebee.png"
+                width="100px"
+                alt="bee"
+              />
+              <p class="extinct-rate">75%</p>
+            </div>
+            <div>
+              <img
+                id="bee2"
+                src="img/Insects/bumblebee.png"
+                width="100px"
+                alt="bee"
+              />
+              <p class="extinct-rate">50%</p>
+            </div>
+            <div>
+              <img
+                id="bee3"
+                src="img/Insects/bumblebee.png"
+                width="100px"
+                alt="bee"
+              />
+              <p class="extinct-rate">25%</p>
+            </div>
+          </div>
+          <div class="svg-container">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="561"
+              height="36"
+              viewBox="0 0 561 36"
+              fill="none"
+            >
+              <path
+                d="M2 14C9.34066 14 14.3804 17.8146 20.4548 20.3704C27.1598 23.1914 34.6255 24.7351 42.2651 26.2963C60.8535 30.095 78.41 30 97.6295 30C130.117 30 162.564 30.8656 194.937 31.3333C218.372 31.672 245.657 34.6637 267.078 25.7037C273.296 23.1031 279.24 20.2045 285.533 17.7037C293.508 14.5349 296.07 22.5409 301.937 27.037C310.721 33.7681 327.962 34 339.22 34C359.297 34 377.742 32.7581 397.567 30.2963C420.877 27.4017 444.378 22.7999 468.031 22C483.308 21.4834 500.092 16.8375 513.702 11.6296C528.321 6.03557 543.113 2 559 2"
+                stroke="black"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
+            </svg>
+          </div>
+          <p class="extinct-description">
+            Opacity show how exstinct an animal will be
+          </p>
+          <div class="temperature-description-container">
+            <div class="text-container">
+              <p class="temperature-description">
+                The current year you are imagining and how much temperature has
+                increased since 2020
+              </p>
+            </div>
+            <div class="img-container">
+            <img src="img/square.png" alt="bee" width="100px" />
+            </div>
+          </div>
+          <div class="temperature-description-container">
+            
+            <div class="img-container">
+            <img src="img/square.png" alt="bee" width="100px" />
+            </div>
+            <div class="text-container">
+              <p class="temperature-description">
+                The current year you are imagining and how much temperature has
+                increased since 2020
+              </p>
+            </div>
+          </div>
+        </div>
+      </div> 
+      </div>
       <svg id="canvas-smoke">
         <g id="smoke" data-id="smoke">
           <circle stroke="#000" stroke-width="3.5" fill="#fff" r="10"></circle>

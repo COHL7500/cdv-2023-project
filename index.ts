@@ -23,16 +23,15 @@ d3.csv('dataset.csv').then((d) => {
 
   d.map((d) => {
     const animal: Animal = {
-
-        name: d.name,
-        type: d.type,
-        temp: tempCol.map((col) => +d[col]),
-        img: 'img/' + d.type + '/' + d.name + '.png',
-        x: parseInt(d.x),
-        y: parseInt(d.y),
-        sizePixels: parseInt(d.sizePixels),
-        extinctDegree: parseFloat(d.extinctDegree),
-        text: d.text,
+      name: d.name,
+      type: d.type,
+      temp: tempCol.map((col) => +d[col]),
+      img: 'img/' + d.type + '/' + d.name + '.png',
+      x: parseInt(d.x),
+      y: parseInt(d.y),
+      sizePixels: parseInt(d.sizePixels),
+      extinctDegree: parseFloat(d.extinctDegree),
+      text: d.text,
     };
 
     animals.push(animal);
@@ -77,9 +76,8 @@ function drawAnimals() {
       return onMouseOver(d);
     })
     .on('mouseleave', () => onMouseLeave())
-    .on('mousemove', (event, d) => onMouseMove(event, d));
+    .on('mousemove', (event, d) => onMouseMove(event));
 }
-
 
 const xScale = d3.scaleLinear().domain([0, 6]).range([6000, 36000]);
 
@@ -105,10 +103,10 @@ function startFade(animals: Animal[]) {
               .attr('src', animal.img)
               .attr('id', `${animal.name}-grave`)
               .style('margin', '4px')
-              .style('max-width', '20px');
-                .on('mouseover', () => onMouseOver(animal))
-                .on('mouseleave', () => onMouseLeave())
-                .on('mousemove', (event) => onMouseMove(event));
+              .style('max-width', '20px')
+              .on('mouseover', () => onMouseOver(animal))
+              .on('mouseleave', () => onMouseLeave())
+              .on('mousemove', (event) => onMouseMove(event));
           }
 
           animalElement.style(
@@ -120,56 +118,60 @@ function startFade(animals: Animal[]) {
   });
 }
 
-const tooltip =
-    d3.select('#canvas')
-        .append('div')
-        .style('opacity', 0)
-        .attr('class', 'tooltip')
+const tooltip = d3
+  .select('#canvas')
+  .append('div')
+  .style('opacity', 0)
+  .attr('class', 'tooltip');
 
 // tooltip
 
-const tooltipTitleText = d3.select('.tooltip')
-    .append('p')
-    .attr('id', 'tooltip-title-text')
+const tooltipTitleText = d3
+  .select('.tooltip')
+  .append('p')
+  .attr('id', 'tooltip-title-text');
 
-const tooltipTypeText = d3.select('.tooltip')
-    .append('p')
-    .attr('id', 'tooltip-type-text')
+const tooltipTypeText = d3
+  .select('.tooltip')
+  .append('p')
+  .attr('id', 'tooltip-type-text');
 
-const tooltipInfoText = d3.select('.tooltip')
-    .append('p')
-    .attr('id', 'tooltip-info-text')
-
+const tooltipInfoText = d3
+  .select('.tooltip')
+  .append('p')
+  .attr('id', 'tooltip-info-text');
 
 const onMouseOver = function (d: Animal) {
   tooltip.style('opacity', 1);
 
-  const re: RegExp = new RegExp("_+", "g")
-  const rawName = (d.name).replace(re, ' ');
+  const re: RegExp = new RegExp('_+', 'g');
+  const rawName = d.name.replace(re, ' ');
   const cleanName = rawName.charAt(0).toUpperCase() + rawName.slice(1);
 
-  tooltipInfoText
-      .text(d.text);
+  tooltipInfoText.text(d.text);
 
-  tooltipTitleText
-      .text(cleanName);
+  tooltipTitleText.text(cleanName);
 
-  tooltipTypeText
-      .text(d.type);
+  tooltipTypeText.text(d.type);
 };
 
 const onMouseMove = function (event: any) {
-
   const tooltipWidth: number = parseInt(tooltip.style('width'));
   const tooltipHeight: number = parseInt(tooltip.style('height'));
 
   tooltip
-      .style('left', ((event.pageX + tooltipWidth) > window.innerWidth ?
-          (event.pageX - tooltipWidth - 10) :
-          (event.pageX + 10)) + 'px')
-      .style('top', ((event.pageY + tooltipHeight) > window.innerHeight ?
-          (event.pageY - tooltipHeight - 10) :
-          (event.pageY + 10)) + 'px');
+    .style(
+      'left',
+      (event.pageX + tooltipWidth > window.innerWidth
+        ? event.pageX - tooltipWidth - 10
+        : event.pageX + 10) + 'px'
+    )
+    .style(
+      'top',
+      (event.pageY + tooltipHeight > window.innerHeight
+        ? event.pageY - tooltipHeight - 10
+        : event.pageY + 10) + 'px'
+    );
 };
 
 const onMouseLeave = function () {
@@ -181,10 +183,14 @@ const graveyardContainer = canvas
   .append('div')
   .attr('class', 'graveyard-container');
 const graveyardTitle = graveyardContainer
-  .append('h3')
-  .attr('class', 'graveyard-title')
-  .text('The following animals are now extinct....');
-const graveyardElement = graveyardContainer.append('div').attr('class', 'graveyard');
+  .append('img')
+  .attr('src', 'img/cross.png')
+  .style('width', '20px')
+  .style('align-self', 'center');
+const graveyardElement = graveyardContainer
+  .append('div')
+  .attr('class', 'graveyard')
+  .style('width', '20px');
 
 // info bar
 
@@ -226,7 +232,6 @@ function updateInfo() {
   d3.select('#yearInfo').text(currYear++);
   d3.select('#tempInfo').text(calcTemp(currYear).toFixed(1) + 'C');
 }
-
 //Add smoke
 class Particle {
   object: any; // Replace 'any' with the actual type of your object
@@ -328,4 +333,3 @@ function startSmoke() {
   const point = d3.select('#smoke');
   const smoke = new Smoke();
 }
-
