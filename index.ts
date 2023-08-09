@@ -129,7 +129,8 @@ const tooltipInfoText = d3.select('.tooltip')
 const onMouseOver = function (d: Animal) {
   tooltip.style('opacity', 1);
 
-  const rawName = (d.name).replace('_', ' ');
+  const re: RegExp = new RegExp("_+", "g")
+  const rawName = (d.name).replace(re, ' ');
   const cleanName = rawName.charAt(0).toUpperCase() + rawName.slice(1);
 
   tooltipInfoText
@@ -145,12 +146,15 @@ const onMouseOver = function (d: Animal) {
 const onMouseMove = function (event: any) {
 
   const tooltipWidth: number = parseInt(tooltip.style('width'));
+  const tooltipHeight: number = parseInt(tooltip.style('height'));
 
   tooltip
       .style('left', ((event.pageX + tooltipWidth) > window.innerWidth ?
           (event.pageX - tooltipWidth - 10) :
           (event.pageX + 10)) + 'px')
-      .style('top', event.pageY + 10 + 'px');
+      .style('top', ((event.pageY + tooltipHeight) > window.innerHeight ?
+          (event.pageY - tooltipHeight - 10) :
+          (event.pageY + 10)) + 'px');
 };
 
 const onMouseLeave = function () {
