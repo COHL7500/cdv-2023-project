@@ -15,6 +15,14 @@ html {
   display: flex;
   z-index: 0;
 
+  #canvas-smoke {
+    width: $canvas-width;
+    height: $canvas-height;
+    position: fixed;
+    bottom: 50px;
+    left: -352px;
+  }
+
   #start-container {
     position: fixed;
   }
@@ -50,15 +58,79 @@ html {
   }
 
   .bottom-info-bar {
-    width: 100vw;
+    min-width: 14vw;
     height: 100px;
     background-color: transparent;
     position: fixed;
+    border: solid;
+    border-width: 10px;
+    border-color: #757474;
     z-index: 1;
     bottom: 0;
     left: 0;
     display: flex;
-    margin-bottom: 1px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    background-color: #757474;
+
+    .chimney1 {
+      position: fixed;
+      filter: invert(43%) sepia(0%) saturate(1392%) hue-rotate(216deg)
+        brightness(105%) contrast(86%);
+      width: 150px;
+      bottom: 124px;
+      left: 120px;
+    }
+
+    .chimney2 {
+      position: fixed;
+      filter: invert(43%) sepia(0%) saturate(1392%) hue-rotate(216deg)
+        brightness(105%) contrast(86%);
+      width: 150px;
+      bottom: 124px;
+      left: 175px;
+    }
+
+    .roof1 {
+      position: fixed;
+      width: 100px;
+      bottom: 120px;
+      left: 10px;
+    }
+
+    .roof2 {
+      position: fixed;
+      width: 100px;
+      bottom: 120px;
+      left: 45px;
+    }
+
+    .car1 {
+      position: fixed;
+      filter: invert(43%) sepia(0%) saturate(1392%) hue-rotate(216deg)
+        brightness(105%) contrast(86%);
+      width: 135px;
+      bottom: 108px;
+      left: 500px;
+    }
+
+    .car2 {
+      position: fixed;
+      filter: invert(43%) sepia(0%) saturate(1392%) hue-rotate(216deg)
+        brightness(105%) contrast(86%);
+      width: 135px;
+      bottom: 75px;
+      right: 500px;
+    }
+
+    .car3 {
+      position: fixed;
+      filter: invert(43%) sepia(0%) saturate(1392%) hue-rotate(216deg)
+        brightness(105%) contrast(86%);
+      width: 135px;
+      bottom: 70px;
+      right: 200px;
+    }
 
     .info-container {
       display: flex;
@@ -68,7 +140,7 @@ html {
     p {
       margin-left: 20px;
       font-size: 40px;
-      color: black;
+      color: white;
     }
   }
 
@@ -161,6 +233,7 @@ html {
     vertical-align: middle;
     white-space: nowrap;
     margin-top: 20px;
+    z-index: 3;
 
     &:hover {
       background-color: darkblue;

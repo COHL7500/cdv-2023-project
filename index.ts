@@ -47,7 +47,8 @@ d3.csv('dataset.csv').then((d) => {
       }
 
       updateInfo();
-    }, 75); // 36 seconds to go from 0C to 6C = 75 milliseconds per year
+      startSmoke();
+    }, 10); // 36 seconds to go from 0C to 6C = 75 milliseconds per year
   });
 });
 
@@ -132,7 +133,12 @@ const graveyardTitle = graveyardContainer
   .text('The following animals are now extinct....');
 const graveyard = graveyardContainer.append('div').attr('class', 'graveyard');
 
-// info bar bottom
+// info bar
+
+const bottomInfoBarContainer = canvas
+  .append('div')
+  .attr('class', 'bottom-info-bar');
+
 const bottomInfoBar = canvas.append('div').attr('class', 'bottom-info-bar');
 
 const infoContainer = bottomInfoBar
@@ -145,6 +151,19 @@ infoContainer
   .append('p')
   .attr('id', 'tempInfo')
   .text(currTemp + 'C');
+
+bottomInfoBar
+  .append('img')
+  .attr('src', 'img/chimney.svg')
+  .attr('class', 'chimney1');
+bottomInfoBar
+  .append('img')
+  .attr('src', 'img/chimney.svg')
+  .attr('class', 'chimney2');
+
+bottomInfoBar.append('img').attr('src', 'img/roof.png').attr('class', 'roof1');
+
+bottomInfoBar.append('img').attr('src', 'img/roof.png').attr('class', 'roof2');
 
 function calcTemp(year: number) {
   return -146.99 + 19.46 * Math.log(year);
@@ -179,8 +198,8 @@ class Particle {
     this.velX =
       (Math.random() < 0.5 ? -1 : 1) * parseFloat((1 / 2).toString()) * size;
     this.maxVelY = size / 2;
-    this.minVelY = 3 * size;
-    this.velY = size * 3 * Math.random() + size * 2;
+    this.minVelY = 1 * size;
+    this.velY = size * 1 * Math.random() + size * 2;
     this.count = count;
     this.id = `smoke-${this.object.id}-${this.count}`;
 
@@ -195,7 +214,7 @@ class Particle {
       .attr('cx', this.x)
       .attr('cy', this.y)
       .attr('r', this.scale)
-      .attr('fill', '#000000')
+      .attr('fill', 'grey')
       .attr('opacity', '0.5')
       .transition()
       .duration(this.duration)
@@ -221,10 +240,10 @@ class Smoke {
   constructor(id: number = 1) {
     this.id = id;
     this.particles = [];
-    this.limit = 50; // Max number of particles.
-    this.step = 50; // Max particles created per interval.
+    this.limit = 1; // Max number of particles.
+    this.step = 5; // Max particles created per interval.
     this.created = 0; // A incrementing numeric id for each particle.
-    this.interval = 200; // How often to add new particles.
+    this.interval = 100; // How often to add new particles.
 
     this.startAnimation();
   }
@@ -241,7 +260,8 @@ class Smoke {
       while (this.particles.length < this.limit && currentStep < this.step) {
         const point = document.querySelector(`#smoke`);
         if (point instanceof Element) {
-          this.particles.push(new Particle(point, this.created, 0, -15, 25));
+          this.particles.push(new Particle(point, this.created, 500, 970, 40));
+          this.particles.push(new Particle(point, this.created, 550, 970, 40));
           this.created += 1;
           currentStep += 1;
         }
@@ -250,51 +270,7 @@ class Smoke {
   }
 }
 
-/*
-let prevYearTemp = 1.11
-for(let i = 2021; i <= 2500; i++) {
-    let currentYearTemp = calcTemp(i)
-    data.push({
-        year: i,
-        temperatureIncrease: currentYearTemp - prevYearTemp,
-        totalTemperature: currentYearTemp
-    })
-    prevYearTemp = currentYearTemp
+function startSmoke() {
+  const point = d3.select('#smoke');
+  const smoke = new Smoke();
 }
-console.log(data)
-
- */
-
-/*
-const w = 1000;
-const h = 1000;
-var canvas = d3
-  .select('#canvas')
-  .append('svg')
-  .attr('width', w)
-  .attr('height', h)
-  .style('background-color', 'black');
-var animalData = [];
-d3.csv('climatedata.csv').then(function (data) {
-  animalData = data;
-  draw();
-  console.log(animalData);
-});
-var trigger = "one";
-function draw() {
-  canvas
-    .selectAll('circle')
-    .data(animalData)
-    .join('circle')
-    .attr('cx', function (d, i) {
-      console.log(d);
-      return i * 30;
-    })
-    .attr('cy', h / 2)
-    .attr('r', function (d) {
-      console.log(d)
-      return d.one;
-    })
-    .attr('fill', 'white');
-}
- */

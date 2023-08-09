@@ -6,12 +6,8 @@
   </head>
   <body>
     <div id="canvas">
-      <svg id="canvas" width="800" height="600">
-        <g
-          id="smoke"
-          data-id="smoke"
-          style="transform: translate(400px, 300px)"
-        >
+      <svg id="canvas-smoke">
+        <g id="smoke" data-id="smoke">
           <circle stroke="#000" stroke-width="3.5" fill="#fff" r="10"></circle>
         </g>
       </svg>
@@ -49,10 +45,5 @@
     </div>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="index.js"></script>
-    <script>
-      const point = document.getElementById('smoke');
-      point.smoke = new Smoke();
-      point.smoke.startAnimation();
-    </script>
   </body>
 </html>
