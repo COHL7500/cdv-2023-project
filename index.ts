@@ -8,10 +8,11 @@ type Animal = {
   type: string;
   temp: number[];
   img: string;
-  text?: string;
+  text: string;
   extinctDegree: number;
   x: number;
   y: number;
+  sizePixels: number;
 };
 
 let animalMap = new Map<string, Animal>();
@@ -27,6 +28,7 @@ d3.csv('dataset.csv').then((d) => {
         img: 'img/' + d.type + '/' + d.name + '.png',
         x: parseInt(d.x),
         y: parseInt(d.y),
+        sizePixels: parseInt(d.sizePixels),
         extinctDegree: parseFloat(d.extinctDegree),
         text: d.text,
     };
@@ -56,7 +58,7 @@ const addAnimal = (animal: Animal) => {
     .append('img')
     .attr('src', animal.img)
     .attr('id', animal.name)
-    .style('max-width', '150px')
+    .style('max-width', `${animal.sizePixels}px`)
     .style('height', 'auto')
     .style('top', `${animal.y}px`)
     .style('left', `${animal.x}px`)
