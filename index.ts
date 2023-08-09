@@ -64,7 +64,9 @@ function drawAnimals() {
     .attr('id', function (d) {
       return d.name;
     })
-    .style('max-width', '150px')
+    .style('max-width', function (d) {
+      return d.sizePixels + 'px';
+    })
     .style('height', 'auto')
     .style('top', function (d) {
       return `${d.y}px`;
