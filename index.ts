@@ -174,6 +174,7 @@ function updateInfo() {
   d3.select('#tempInfo').text(calcTemp(currYear).toFixed(1) + 'C');
 }
 
+//Add smoke 
 class Particle {
   object: any; // Replace 'any' with the actual type of your object
   x: number;
