@@ -15,6 +15,7 @@ type Animal = {
 };
 
 let animalMap = new Map<string, Animal>();
+let animals: Animal[] = [];
 
 d3.csv('dataset.csv').then((d) => {
   const tempCol = d.columns.slice(2);
@@ -31,16 +32,13 @@ d3.csv('dataset.csv').then((d) => {
       text: d.text,
     };
 
-    animalMap.set(d.name, animal);
-
-    addAnimal(animal);
+    animals.push(animal);
   });
-
-  console.log(animalMap);
-
+  console.log(animals);
+  drawAnimals();
   d3.select('#start-button').on('click', () => {
     d3.select('#start-container').remove();
-    startFade(animalMap);
+    startFade(animals);
     const infoUpdateInterval = setInterval(() => {
       if (currYear == 2600) {
         clearInterval(infoUpdateInterval);
@@ -52,26 +50,37 @@ d3.csv('dataset.csv').then((d) => {
   });
 });
 
-const addAnimal = (animal: Animal) => {
-  const animalElement = canvas
+function drawAnimals() {
+  canvas
     .append('img')
-    .attr('src', animal.img)
-    .attr('id', animal.name)
+    .data(animals)
+    .join('img')
+    .attr('src', function (d) {
+      return d.img;
+    })
+    .attr('id', function (d) {
+      return d.name;
+    })
     .style('max-width', '150px')
     .style('height', 'auto')
-    .style('top', `${animal.y}px`)
-    .style('left', `${animal.x}px`)
-    .style('position', 'absolute');
-
-  animalElement.on('mouseover', () => onMouseOver(animal));
-  animalElement.on('mouseleave', () => onMouseLeave());
-  animalElement.on('mousemove', (event) => onMouseMove(event, animal));
-};
+    .style('top', function (d) {
+      return `${d.y}px`;
+    })
+    .style('left', function (d) {
+      return `${d.x}px`;
+    })
+    .style('position', 'absolute')
+    .on('mouseover', function (event, d) {
+      return onMouseOver(d);
+    })
+    .on('mouseleave', () => onMouseLeave())
+    .on('mousemove', (event, d) => onMouseMove(event, d));
+}
 
 const xScale = d3.scaleLinear().domain([0, 6]).range([6000, 36000]);
 
-function startFade(animalMap: Map<string, Animal>) {
-  animalMap.forEach((animal) => {
+function startFade(animals: Animal[]) {
+  animals.forEach((animal) => {
     const animalElement = d3.select('#' + animal.name);
     let addToGrave = false;
     animalElement
@@ -174,7 +183,7 @@ function updateInfo() {
   d3.select('#tempInfo').text(calcTemp(currYear).toFixed(1) + 'C');
 }
 
-//Add smoke 
+//Add smoke
 class Particle {
   object: any; // Replace 'any' with the actual type of your object
   x: number;
