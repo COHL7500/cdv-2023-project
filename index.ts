@@ -15,7 +15,6 @@ type Animal = {
   sizePixels: number;
 };
 
-let animalMap = new Map<string, Animal>();
 let animals: Animal[] = [];
 
 d3.csv('dataset.csv').then((d) => {
