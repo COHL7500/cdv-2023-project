@@ -15,7 +15,6 @@ type Animal = {
   sizePixels: number;
 };
 
-let animalMap = new Map<string, Animal>();
 let animals: Animal[] = [];
 
 d3.csv('dataset.csv').then((d) => {
@@ -36,7 +35,7 @@ d3.csv('dataset.csv').then((d) => {
 
     animals.push(animal);
   });
-  console.log(animals);
+
   drawAnimals();
   d3.select('#start-button').on('click', () => {
     d3.select('#start-container').remove();
@@ -64,7 +63,9 @@ function drawAnimals() {
     .attr('id', function (d) {
       return d.name;
     })
-    .style('max-width', '150px')
+    .style('max-width', function (d) {
+      return d.sizePixels + 'px';
+    })
     .style('height', 'auto')
     .style('top', function (d) {
       return `${d.y}px`;
@@ -77,7 +78,7 @@ function drawAnimals() {
       return onMouseOver(d);
     })
     .on('mouseleave', () => onMouseLeave())
-    .on('mousemove', (event, d) => onMouseMove(event));
+    .on('mousemove', (event) => onMouseMove(event));
 }
 
 const xScale = d3.scaleLinear().domain([0, 6]).range([6000, 36000]);
