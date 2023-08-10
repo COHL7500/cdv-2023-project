@@ -40,6 +40,7 @@ d3.csv('dataset.csv').then((d) => {
   drawAnimals();
   d3.select('#start-button').on('click', () => {
     d3.select('#start-container').remove();
+    d3.select('#reset-button').style('visibility', 'visible');
     startFade(animals);
     const infoUpdateInterval = setInterval(() => {
       if (currYear == 2600) {
@@ -332,4 +333,45 @@ class Smoke {
 function startSmoke() {
   const point = d3.select('#smoke');
   const smoke = new Smoke();
+}
+
+//Button
+var animateButton = function (e) {
+  e.preventDefault;
+  //reset animation
+  e.target.classList.remove('animate');
+
+  e.target.classList.add('animate');
+  setTimeout(function () {
+    e.target.classList.remove('animate');
+  }, 700);
+};
+
+var bubblyButtons = document.getElementsByClassName('bubbly-button');
+
+for (var i = 0; i < bubblyButtons.length; i++) {
+  bubblyButtons[i].addEventListener('click', animateButton, false);
+}
+
+d3.select('.bubbly-button').on('click', () => {
+  d3.select('.modal').style('display', 'none');
+});
+
+// Restart button
+d3.select('#reset-button').on('click', () => {
+  // Add a query parameter to the URL to indicate that modal should be hidden
+  const url = new URL(window.location.href);
+  url.searchParams.set('hideModal', 'true');
+  window.location.href = url.toString();
+  window.location.reload()
+
+  // You can also add other actions here that you want to perform before the page reloads
+});
+
+// Check if the modal should be hidden based on URL parameter
+const shouldHideModal = new URLSearchParams(window.location.search).get(
+  'hideModal'
+);
+if (shouldHideModal === 'true') {
+  d3.select('.modal').style('display', 'none');
 }

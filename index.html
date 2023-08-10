@@ -12,6 +12,7 @@
   </head>
   <body>
     <div id="canvas">
+      <button id="reset-button" type="button">Restart</button>
       <div class="modal">
         <div class="left-container">
           <h2 class="title">CDV - The bigger picture</h2>
@@ -37,6 +38,7 @@
             <br />"Imagine" is a project that takes you on an adventure to learn
             how different animals are affected by changes in temperature.
           </p>
+          <button class="bubbly-button">View Picture</button>
           <h2 class="title">Made by...</h2>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -115,11 +117,31 @@
             </svg>
           </div>
           <p class="extinct-description">
-            Opacity show how exstinct an animal will be
+            Opacity show the extinction rate of the current animal
           </p>
-          <div>
-            <img src="img/click.png" alt="click" width="250px">
-            <p class="click-description">Hover animals to learn more </p>
+          <div class="click-description-container">
+            <div class="click-container">
+              <p class="click-description">
+                Discover more about each animal by hovering each of them
+              </p>
+            </div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="74"
+              height="33"
+              viewBox="0 0 74 33"
+              fill="none"
+            >
+              <path
+                d="M1.6123 18.1474C19.5721 18.1474 37.1077 18.0883 54.8642 15.4081C56.8396 15.1099 70.7305 13.7429 72.1765 15.189C73.6131 16.6256 68.4775 17.1228 67.191 18.6953C64.2459 22.2948 61.4558 26.4763 58.8635 30.3646C57.9624 31.7163 61.5184 25.8927 62.2603 24.5573C64.4548 20.6071 67.4514 17.6232 69.6564 13.7645C70.2107 12.7944 67.9495 12.5561 66.4788 12.0114C63.5597 10.9302 61.9178 8.76333 59.3566 7.29979C57.5917 6.2913 51.8202 0.567785 50.9196 2.36907"
+                stroke="black"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
+            </svg>
+            <div class="img-click-container">
+              <img src="img/click.png" alt="click" width="200px" />
+            </div>
           </div>
           <div class="temperature-description-container">
             <div class="text-container">
@@ -128,22 +150,47 @@
                 increased since 2020
               </p>
             </div>
-            <div class="img-container">
-            <img src="img/temperatureimg.png" alt="bee" width="100px" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="74"
+              height="33"
+              viewBox="0 0 74 33"
+              fill="none"
+            >
+              <path
+                d="M1.6123 18.1474C19.5721 18.1474 37.1077 18.0883 54.8642 15.4081C56.8396 15.1099 70.7305 13.7429 72.1765 15.189C73.6131 16.6256 68.4775 17.1228 67.191 18.6953C64.2459 22.2948 61.4558 26.4763 58.8635 30.3646C57.9624 31.7163 61.5184 25.8927 62.2603 24.5573C64.4548 20.6071 67.4514 17.6232 69.6564 13.7645C70.2107 12.7944 67.9495 12.5561 66.4788 12.0114C63.5597 10.9302 61.9178 8.76333 59.3566 7.29979C57.5917 6.2913 51.8202 0.567785 50.9196 2.36907"
+                stroke="black"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
+            </svg>
+            <div class="img-temperature-container">
+              <img src="img/temperatureimg.png" alt="bee" width="100px" />
             </div>
           </div>
           <div class="grave-description-container">
             <div class="grave-text-container">
-              <p class="grave-description">
-                Animals that are now extinct
-              </p>
+              <p class="grave-description">Animals that are now extinct</p>
             </div>
-            <div class="img-container">
-            <img src="img/graveyard.png" alt="grave" width="200px" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="74"
+              height="33"
+              viewBox="0 0 74 33"
+              fill="none"
+            >
+              <path
+                d="M1.6123 18.1474C19.5721 18.1474 37.1077 18.0883 54.8642 15.4081C56.8396 15.1099 70.7305 13.7429 72.1765 15.189C73.6131 16.6256 68.4775 17.1228 67.191 18.6953C64.2459 22.2948 61.4558 26.4763 58.8635 30.3646C57.9624 31.7163 61.5184 25.8927 62.2603 24.5573C64.4548 20.6071 67.4514 17.6232 69.6564 13.7645C70.2107 12.7944 67.9495 12.5561 66.4788 12.0114C63.5597 10.9302 61.9178 8.76333 59.3566 7.29979C57.5917 6.2913 51.8202 0.567785 50.9196 2.36907"
+                stroke="black"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
+            </svg>
+            <div class="img-grave-container">
+              <img src="img/graveyard.png" alt="grave" width="200px" />
             </div>
           </div>
         </div>
-      </div> 
       </div>
       <svg id="canvas-smoke">
         <g id="smoke" data-id="smoke">
@@ -178,7 +225,7 @@
           <span>our</span>
           <span>planet</span>
           <br />
-          <button id="start-button" type="button">Start Experience</button>
+          <button id="start-button" type="button">Start Emitting CO2</button>
         </h1>
       </div>
     </div>

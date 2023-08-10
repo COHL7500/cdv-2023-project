@@ -1,6 +1,10 @@
 $canvas-color: black;
 $canvas-width: 1920px;
 $canvas-height: 1200px;
+$fuschia: #4393e4;
+$button-bg: $fuschia;
+$button-text-color: #fff;
+$baby-blue: #f8faff;
 
 body,
 html {
@@ -12,14 +16,50 @@ html {
   background-image: url(img/landscape.jpg);
   min-width: $canvas-width;
   min-height: $canvas-height;
-  z-index: 0;
+  position: absolute;
+
+  #reset-button {
+    appearance: menulist-button;
+    border-radius: 16px;
+    border-width: 0 0 4px;
+    visibility: hidden;
+    margin-left: 20px;
+    cursor: pointer;
+    display: inline-block;
+    position: absolute;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    top: 0;
+    left: 0;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    line-height: 20px;
+    outline: none;
+    overflow: visible;
+    padding: 13px 35px;
+    text-align: center;
+    text-transform: uppercase;
+    touch-action: manipulation;
+    transform: translateZ(0);
+    transition: filter 0.2s;
+    user-select: none;
+    -webkit-user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;
+    margin-top: 20px;
+    z-index: 3;
+
+    &:hover {
+      background-color: darkblue;
+    }
+  }
 
   .modal {
     background-color: #e8c859;
     position: fixed;
     width: 100vw;
     height: 100vh;
-    z-index: 1999;
+    z-index: 90;
     display: flex;
     .left-container {
       display: flex;
@@ -35,13 +75,13 @@ html {
       .description {
         font-family: 'Roboto', sans-serif;
         width: 50%;
-        margin-bottom: 120px;
+        margin-bottom: 0;
       }
 
       .madeby {
         font-family: 'Roboto', sans-serif;
         width: 50%;
-        margin-bottom: 120px;
+        margin-bottom: 0px;
       }
     }
     .right-container {
@@ -80,9 +120,22 @@ html {
         margin-bottom: 50px;
       }
 
+      .click-description-container {
+        display: flex;
+        margin-bottom: 48px;
+        justify-content: space-between;
+      }
+
       .click-description {
         font-family: 'Roboto', sans-serif;
-        margin-bottom: 80px;
+        width: 50%;
+        margin-right: 20px;
+      }
+
+      .img-click-container {
+        width: 70%;
+        display: flex;
+        justify-content: center;
       }
 
       .temperature-description-container {
@@ -90,19 +143,15 @@ html {
         margin-bottom: 48px;
       }
 
-      .text-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-
       .temperature-description {
         font-family: 'Roboto', sans-serif;
         width: 50%;
       }
 
-      .img-container {
-        width: 50%;
+      .img-temperature-container {
+        width: 90%;
+        display: flex;
+        justify-content: center;
       }
 
       .grave-description {
@@ -117,8 +166,10 @@ html {
         width: 720px;
       }
 
-      .grave-text-container {
-        margin-right: 160px;
+      .img-grave-container {
+        width: 50%;
+        display: flex;
+        justify-content: center;
       }
     }
   }
@@ -129,11 +180,6 @@ html {
     position: fixed;
     bottom: 50px;
     left: -352px;
-  }
-
-  #start-container {
-    position: fixed;
-    z-index: 1;
   }
 
   .graveyard-container {
@@ -250,7 +296,8 @@ html {
 
   .tooltip {
     opacity: 0;
-    font-family: 'Arial', 'sans-serif';
+    font-family: 'Roboto', sans-serif;
+    font-weight: 800;
     color: black;
     z-index: 3;
     width: 500px;
@@ -285,7 +332,7 @@ html {
   }
 
   h1 {
-    font-family: 'Montserrat Medium', sans-serif;
+    font-family: 'Roboto', sans-serif;
     max-width: 40ch;
     text-align: center;
     transform: scale(0.94);
@@ -335,7 +382,7 @@ html {
     color: #ffffff;
     cursor: pointer;
     display: inline-block;
-    font-family: din-round, sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 15px;
     font-weight: 700;
     letter-spacing: 0.8px;
@@ -360,32 +407,51 @@ html {
     }
   }
 
-  .button-19:after {
-    background-clip: padding-box;
-    background-color: #1cb0f6;
-    border: solid transparent;
-    border-radius: 16px;
-    border-width: 0 0 4px;
-    bottom: -4px;
-    content: '';
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: -1;
-  }
+  //Button
+  .bubbly-button {
+    font-family: 'Roboto', sans-serif;
+    display: inline-block;
+    font-size: 1em;
+    padding: 1em 2em;
+    margin-top: 50px;
+    margin-bottom: 60px;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: $button-bg;
+    color: $button-text-color;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
+    box-shadow: 0 2px 25px rgba(#ed4d13, 0.5);
 
-  .button-19,
-  .button-19:focus {
-    user-select: auto;
-  }
+    &:focus {
+      outline: 0;
+    }
 
-  .button-19:hover:not(:disabled) {
-    filter: brightness(1.1);
-    -webkit-filter: brightness(1.1);
-  }
+    &:before,
+    &:after {
+      position: absolute;
+      content: '';
+      display: block;
+      width: 140%;
+      height: 100%;
+      left: -20%;
+      z-index: -1000;
+      transition: all ease-in-out 0.5s;
+      background-repeat: no-repeat;
+    }
 
-  .button-19:disabled {
-    cursor: auto;
+    &.animate {
+      &:before {
+        display: block;
+        animation: topBubbles ease-in-out 0.75s forwards;
+      }
+      &:after {
+        display: block;
+        animation: bottomBubbles ease-in-out 0.75s forwards;
+      }
+    }
   }
 }
