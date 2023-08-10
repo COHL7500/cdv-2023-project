@@ -368,6 +368,7 @@ d3.select('#reset-button').on('click', () => {
   const url = new URL(window.location.href);
   url.searchParams.set('hideModal', 'true');
   window.location.href = url.toString();
+  window.location.reload();
 
   // You can also add other actions here that you want to perform before the page reloads
 });
