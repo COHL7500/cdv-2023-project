@@ -104,33 +104,6 @@ html {
       left: 45px;
     }
 
-    .car1 {
-      position: fixed;
-      filter: invert(43%) sepia(0%) saturate(1392%) hue-rotate(216deg)
-        brightness(105%) contrast(86%);
-      width: 135px;
-      bottom: 108px;
-      left: 500px;
-    }
-
-    .car2 {
-      position: fixed;
-      filter: invert(43%) sepia(0%) saturate(1392%) hue-rotate(216deg)
-        brightness(105%) contrast(86%);
-      width: 135px;
-      bottom: 75px;
-      right: 500px;
-    }
-
-    .car3 {
-      position: fixed;
-      filter: invert(43%) sepia(0%) saturate(1392%) hue-rotate(216deg)
-        brightness(105%) contrast(86%);
-      width: 135px;
-      bottom: 70px;
-      right: 200px;
-    }
-
     .info-container {
       display: flex;
       align-items: center;
