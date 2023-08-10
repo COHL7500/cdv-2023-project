@@ -22,16 +22,15 @@ d3.csv('dataset.csv').then((d) => {
 
   d.map((d) => {
     const animal: Animal = {
-
-        name: d.name,
-        type: d.type,
-        temp: tempCol.map((col) => +d[col]),
-        img: 'img/' + d.type + '/' + d.name + '.png',
-        x: parseInt(d.x),
-        y: parseInt(d.y),
-        sizePixels: parseInt(d.sizePixels),
-        extinctDegree: parseFloat(d.extinctDegree),
-        text: d.text,
+      name: d.name,
+      type: d.type,
+      temp: tempCol.map((col) => +d[col]),
+      img: 'img/' + d.type + '/' + d.name + '.png',
+      x: parseInt(d.x),
+      y: parseInt(d.y),
+      sizePixels: parseInt(d.sizePixels),
+      extinctDegree: parseFloat(d.extinctDegree),
+      text: d.text,
     };
 
     animals.push(animal);
@@ -40,6 +39,7 @@ d3.csv('dataset.csv').then((d) => {
   drawAnimals();
   d3.select('#start-button').on('click', () => {
     d3.select('#start-container').remove();
+    d3.select('#reset-button').style('visibility', 'visible');
     startFade(animals);
     const infoUpdateInterval = setInterval(() => {
       if (currYear == 2600) {
@@ -81,7 +81,6 @@ function drawAnimals() {
     .on('mousemove', (event) => onMouseMove(event));
 }
 
-
 const xScale = d3.scaleLinear().domain([0, 6]).range([6000, 36000]);
 
 function startFade(animals: Animal[]) {
@@ -107,9 +106,9 @@ function startFade(animals: Animal[]) {
               .attr('id', `${animal.name}-grave`)
               .style('margin', '4px')
               .style('max-width', '20px')
-                .on('mouseover', () => onMouseOver(animal))
-                .on('mouseleave', () => onMouseLeave())
-                .on('mousemove', (event) => onMouseMove(event));
+              .on('mouseover', () => onMouseOver(animal))
+              .on('mouseleave', () => onMouseLeave())
+              .on('mousemove', (event) => onMouseMove(event));
           }
 
           animalElement.style(
@@ -121,56 +120,60 @@ function startFade(animals: Animal[]) {
   });
 }
 
-const tooltip =
-    d3.select('#canvas')
-        .append('div')
-        .style('opacity', 0)
-        .attr('class', 'tooltip')
+const tooltip = d3
+  .select('#canvas')
+  .append('div')
+  .style('opacity', 0)
+  .attr('class', 'tooltip');
 
 // tooltip
 
-const tooltipTitleText = d3.select('.tooltip')
-    .append('p')
-    .attr('id', 'tooltip-title-text')
+const tooltipTitleText = d3
+  .select('.tooltip')
+  .append('p')
+  .attr('id', 'tooltip-title-text');
 
-const tooltipTypeText = d3.select('.tooltip')
-    .append('p')
-    .attr('id', 'tooltip-type-text')
+const tooltipTypeText = d3
+  .select('.tooltip')
+  .append('p')
+  .attr('id', 'tooltip-type-text');
 
-const tooltipInfoText = d3.select('.tooltip')
-    .append('p')
-    .attr('id', 'tooltip-info-text')
-
+const tooltipInfoText = d3
+  .select('.tooltip')
+  .append('p')
+  .attr('id', 'tooltip-info-text');
 
 const onMouseOver = function (d: Animal) {
   tooltip.style('opacity', 1);
 
-  const re: RegExp = new RegExp("_+", "g")
-  const rawName = (d.name).replace(re, ' ');
+  const re: RegExp = new RegExp('_+', 'g');
+  const rawName = d.name.replace(re, ' ');
   const cleanName = rawName.charAt(0).toUpperCase() + rawName.slice(1);
 
-  tooltipInfoText
-      .text(d.text);
+  tooltipInfoText.text(d.text);
 
-  tooltipTitleText
-      .text(cleanName);
+  tooltipTitleText.text(cleanName);
 
-  tooltipTypeText
-      .text(d.type);
+  tooltipTypeText.text(d.type);
 };
 
 const onMouseMove = function (event: any) {
-
   const tooltipWidth: number = parseInt(tooltip.style('width'));
   const tooltipHeight: number = parseInt(tooltip.style('height'));
 
   tooltip
-      .style('left', ((event.pageX + tooltipWidth) > window.innerWidth ?
-          (event.pageX - tooltipWidth - 10) :
-          (event.pageX + 10)) + 'px')
-      .style('top', ((event.pageY + tooltipHeight) > window.innerHeight ?
-          (event.pageY - tooltipHeight - 10) :
-          (event.pageY + 10)) + 'px');
+    .style(
+      'left',
+      (event.pageX + tooltipWidth > window.innerWidth
+        ? event.pageX - tooltipWidth - 10
+        : event.pageX + 10) + 'px'
+    )
+    .style(
+      'top',
+      (event.pageY + tooltipHeight > window.innerHeight
+        ? event.pageY - tooltipHeight - 10
+        : event.pageY + 10) + 'px'
+    );
 };
 
 const onMouseLeave = function () {
@@ -182,10 +185,14 @@ const graveyardContainer = canvas
   .append('div')
   .attr('class', 'graveyard-container');
 const graveyardTitle = graveyardContainer
-  .append('h3')
-  .attr('class', 'graveyard-title')
-  .text('The following animals are now extinct....');
-const graveyardElement = graveyardContainer.append('div').attr('class', 'graveyard');
+  .append('img')
+  .attr('src', 'img/cross.png')
+  .style('width', '20px')
+  .style('align-self', 'center');
+const graveyardElement = graveyardContainer
+  .append('div')
+  .attr('class', 'graveyard')
+  .style('width', '20px');
 
 // info bar
 
@@ -227,7 +234,6 @@ function updateInfo() {
   d3.select('#yearInfo').text(currYear++);
   d3.select('#tempInfo').text(calcTemp(currYear).toFixed(1) + 'C');
 }
-
 //Add smoke
 class Particle {
   object: any; // Replace 'any' with the actual type of your object
@@ -330,3 +336,43 @@ function startSmoke() {
   const smoke = new Smoke();
 }
 
+//Button
+var animateButton = function (e) {
+  e.preventDefault;
+  //reset animation
+  e.target.classList.remove('animate');
+
+  e.target.classList.add('animate');
+  setTimeout(function () {
+    e.target.classList.remove('animate');
+  }, 700);
+};
+
+var bubblyButtons = document.getElementsByClassName('bubbly-button');
+
+for (var i = 0; i < bubblyButtons.length; i++) {
+  bubblyButtons[i].addEventListener('click', animateButton, false);
+}
+
+d3.select('.bubbly-button').on('click', () => {
+  d3.select('.modal').style('display', 'none');
+});
+
+// Restart button
+d3.select('#reset-button').on('click', () => {
+  // Add a query parameter to the URL to indicate that modal should be hidden
+  const url = new URL(window.location.href);
+  url.searchParams.set('hideModal', 'true');
+  window.location.href = url.toString();
+  window.location.reload()
+
+  // You can also add other actions here that you want to perform before the page reloads
+});
+
+// Check if the modal should be hidden based on URL parameter
+const shouldHideModal = new URLSearchParams(window.location.search).get(
+  'hideModal'
+);
+if (shouldHideModal === 'true') {
+  d3.select('.modal').style('display', 'none');
+}
