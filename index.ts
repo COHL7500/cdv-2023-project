@@ -227,7 +227,7 @@ bottomInfoBar.append('img').attr('src', 'img/roof.png').attr('class', 'roof1');
 bottomInfoBar.append('img').attr('src', 'img/roof.png').attr('class', 'roof2');
 
 function calcTemp(year: number) {
-  return -146.99 + 19.46 * Math.log(year);
+  return -153.99 + 20.2449 * Math.log(year);
 }
 
 function updateInfo() {
