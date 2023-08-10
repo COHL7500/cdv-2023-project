@@ -358,13 +358,16 @@ d3.select('.bubbly-button').on('click', () => {
   d3.select('.modal').style('display', 'none');
 });
 
+d3.select('.bubbly-button').on('click', () => {
+  d3.select('.modal').style('display', 'none');
+});
+
 // Restart button
 d3.select('#reset-button').on('click', () => {
   // Add a query parameter to the URL to indicate that modal should be hidden
   const url = new URL(window.location.href);
   url.searchParams.set('hideModal', 'true');
   window.location.href = url.toString();
-  window.location.reload()
 
   // You can also add other actions here that you want to perform before the page reloads
 });

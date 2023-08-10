@@ -20,6 +20,8 @@ html {
 
   #reset-button {
     appearance: menulist-button;
+    background-color: #1899d6;
+    border: solid transparent;
     border-radius: 16px;
     border-width: 0 0 4px;
     visibility: hidden;
@@ -32,7 +34,9 @@ html {
     top: 0;
     left: 0;
     font-weight: 700;
+    color: white;
     letter-spacing: 0.8px;
+    margin-left: 20px;
     line-height: 20px;
     outline: none;
     overflow: visible;
